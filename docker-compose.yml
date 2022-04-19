@@ -1,0 +1,53 @@
+version: '3'
+services:
+    prometheus:
+        container_name: prometheus
+        image: prom/prometheus:v2.30.3
+        volumes:
+            - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+        ports:
+            - '9090:9090'
+        command:
+            - '--config.file=/etc/prometheus/prometheus.yml'
+            - '--web.enable-admin-api'
+            - '--web.enable-lifecycle'
+    php:
+        build: ./docker/php
+        container_name: php
+        ports:
+            - "5200:5200"
+            - "10240:10240"
+            - "9700:9700"
+            - "7000:7000"
+            - "7010:7010"
+            - "7020:7020"
+            - "7030:7030"
+            - "7040:7040"
+            - "7050:7050"
+        links:
+            - "mysql:mysql"
+            - "redis:redis"
+            # - "ssdb:ssdb"
+        volumes:
+            - "~/Documents/docker/www:/docker/www"
+            - "~/Documents/docker/log:/docker/log"
+        environment:
+            TZ: "Asia/Shanghai"
+        working_dir: "/docker"
+        restart: "no"
+        cap_add:
+            - SYS_PTRACE
+    nginx:
+        build: ./docker/nginx
+        container_name: nginx
+        ports:
+            - "80:80"
+            - "443:443"
+        links:
+            - "php:php"
+        volumes:
+            - "./:/docker/www"
+            - "./docker/log:/docker/log"
+            - "./nginx/conf.d:/etc/nginx/conf.d"
+        working_dir: "/docker"
+        restart: "no"

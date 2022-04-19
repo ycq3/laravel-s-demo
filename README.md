@@ -6,6 +6,7 @@
 ## 启动
 先启动容器,laravel-s需要自己进入php容器启动
 ```bash
+composer install -o
 docker-compose up -d
 ```
 ## 说明

@@ -14,3 +14,6 @@ yarn-error.log
 /.idea
 /.vscode
 /docker/log/*/*.log
+/storage/laravels.conf
+/storage/laravels.pid
+/storage/laravels-custom-processes.pid

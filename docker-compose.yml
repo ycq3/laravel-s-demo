@@ -69,3 +69,10 @@ services:
             - "127.0.0.1:6379:6379"
         working_dir: "/root"
         restart: "no"
+
+    grafana:
+       container_name: grafana
+       image: grafana/grafana:7.5.11
+       restart: "no"
+       ports:
+           - 3000:3000

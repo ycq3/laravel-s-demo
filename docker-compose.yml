@@ -51,7 +51,6 @@ services:
             - "./docker/nginx/conf.d:/etc/nginx/conf.d"
         working_dir: "/docker"
         restart: "no"
-
     mysql:
         container_name: mysql
         image: mysql/mysql-server:8.0
@@ -61,7 +60,6 @@ services:
             - "127.0.0.1:3306:3306"
         environment:
             MYSQL_ROOT_PASSWORD: root
-
     redis:
         build: ./docker/redis
         container_name: redis
@@ -69,7 +67,6 @@ services:
             - "127.0.0.1:6379:6379"
         working_dir: "/root"
         restart: "no"
-
     grafana:
        container_name: grafana
        image: grafana/grafana:7.5.11

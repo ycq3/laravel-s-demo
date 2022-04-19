@@ -176,7 +176,9 @@ return [
     |
     */
 
-    'processes' => [],
+    'processes' => [
+        Hhxsv5\LaravelS\Components\Prometheus\CollectorProcess::getDefinition(),
+    ],
 
     /*
     |--------------------------------------------------------------------------

@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+use Hhxsv5\LaravelS\Components\Prometheus\Exporter;
+
+Route::get('/actuator/prometheus', function () {
+    $result = app(Exporter::class)->render();
+    return response($result, 200, ['Content-Type' => Exporter::REDNER_MIME_TYPE]);
+});

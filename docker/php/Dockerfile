@@ -57,7 +57,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install gd \
     && pecl install apcu-$APCU_VERSION \
     # JIT is incompatible with pcov
-    # && pecl install pcov && docker-php-ext-enable pcov \ 
+    # && pecl install pcov && docker-php-ext-enable pcov \
     && pecl install inotify-$INOTIFY_VERSION && docker-php-ext-enable inotify \
     && pecl install mongodb-$MONGODB_VERSION && docker-php-ext-enable mongodb \
     && pecl install mcrypt-$MCRYPT_VERSION && docker-php-ext-enable mcrypt \
@@ -98,5 +98,5 @@ RUN chown -R www-data.www-data /docker/www /docker/log/php8
 RUN touch /docker/log/php8/php_errors.log && chmod 777 /docker/log/php8/php_errors.log
 
 RUN rm -rf /var/lib/apt/lists/*
-
-CMD ["php-fpm"]
+ADD  entrypoint.sh /entrypoint.sh
+ENTRYPOINT /entrypoint.sh

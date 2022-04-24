@@ -11,3 +11,11 @@ scrape_configs:
     static_configs:
       - targets:
           - php:5200
+  - job_name: laravel-nginx
+    honor_timestamps: true
+    metrics_path: /actuator/prometheus
+    scheme: http
+    follow_redirects: true
+    static_configs:
+      - targets:
+          - nginx:80
